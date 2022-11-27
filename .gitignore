@@ -1,0 +1,5 @@
+# Advent of Code Input Data
+data/
+
+# JetBrains stuff
+.idea/
