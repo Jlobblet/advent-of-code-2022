@@ -6,7 +6,8 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 ## Dependencies
 
 - [`make`](https://www.gnu.org/software/make/)
-- more to be added ;)
+- [J](https://www.jsoftware.com)
+- [gcc-9](https://gcc.gnu.org/)
 
 ### Likely dependencies for future days
 
@@ -14,10 +15,9 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [dotnet](https://dotnet.microsoft.com/en-us/)
 - [ghc](https://www.haskell.org/ghcup/)
 - [kotlin](https://kotlinlang.org/)
-- [J](https://www.jsoftware.com)
 - [BQN](https://mlochbaum.github.io/BQN/)
 - [python](https://www.python.org/)
-- a C compiler, probably [clang](https://clang.llvm.org/) or [gcc](https://gcc.gnu.org/)
+- [clang](https://clang.llvm.org/)
 - [factor](https://factorcode.org/)
 
 ## Usage
