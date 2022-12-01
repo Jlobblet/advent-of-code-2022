@@ -24,7 +24,8 @@ fn aoc1<I: BufRead>(mut input: I, n: usize) -> (usize, usize) {
 }
 
 fn main() {
-    let file = File::open(var("INPUT").expect("Missing INPUT environment variable")).expect("Should be able to open input file");
+    let file = File::open(var("INPUT").expect("Missing INPUT environment variable"))
+        .expect("Should be able to open input file");
     let (a, b) = aoc1(BufReader::new(file), 3);
     println!("A: {a}\nB: {b}");
 }
