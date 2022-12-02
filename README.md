@@ -8,10 +8,10 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [`make`](https://www.gnu.org/software/make/)
 - [J](https://www.jsoftware.com)
 - [gcc-9](https://gcc.gnu.org/)
+- [rust](https://www.rust-lang.org/)
 
 ### Likely dependencies for future days
 
-- [rust](https://www.rust-lang.org/)
 - [dotnet](https://dotnet.microsoft.com/en-us/)
 - [ghc](https://www.haskell.org/ghcup/)
 - [kotlin](https://kotlinlang.org/)
