@@ -13,7 +13,7 @@ sol =. {{
     echo bts
 }}
 
-input =. freads 2!:5 'INPUT'
+input =. 'MODE' freads&:(2!:5) 'INPUT'
 sol input
 
 exit ''
