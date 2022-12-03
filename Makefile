@@ -20,3 +20,6 @@ day03fs:
 
 day03c:
 	$(MAKE) -C src/day03c clean run
+
+day03sh:
+	$(MAKE) -C src/day03sh clean run
