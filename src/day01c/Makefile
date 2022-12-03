@@ -16,5 +16,3 @@ debug: day01
 
 clean:
 	rm -rf day01 elves
-
-clean-run: clean run
