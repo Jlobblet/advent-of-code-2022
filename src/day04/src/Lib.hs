@@ -8,8 +8,11 @@ import Data.Text.Lazy ( Text )
 import Data.Text.Lazy.Read ( decimal )
 import Data.List ( genericLength )
 
+w :: (a -> a -> b) -> a -> b
+w f a = f a a
+
 both :: Bifunctor p => (a -> b) -> p a a -> p b b
-both f = bimap f f
+both = w bimap
 
 solution :: Text -> (Integer, Integer)
 solution t = both ($ p) (partA, partB)
