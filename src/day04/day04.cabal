@@ -1,0 +1,73 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.35.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           day04
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/jlobblet/advent-of-code-2022#readme>
+homepage:       https://github.com/Jlobblet/advent-of-code-2022#readme
+bug-reports:    https://github.com/Jlobblet/advent-of-code-2022/issues
+author:         John Blundell
+maintainer:     john+github@jlobblet.co.uk
+copyright:      2022 John Blundell
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/Jlobblet/advent-of-code-2022
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_day04
+  hs-source-dirs:
+      src
+  default-extensions:
+      ImportQualifiedPost
+      OverloadedStrings
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , text >=2.0.1
+  default-language: Haskell2010
+
+executable day04-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_day04
+  hs-source-dirs:
+      app
+  default-extensions:
+      ImportQualifiedPost
+      OverloadedStrings
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , day04
+    , text >=2.0.1
+  default-language: Haskell2010
+
+test-suite day04-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_day04
+  hs-source-dirs:
+      test
+  default-extensions:
+      ImportQualifiedPost
+      OverloadedStrings
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , day04
+    , text >=2.0.1
+  default-language: Haskell2010
