@@ -10,6 +10,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [gcc-9](https://gcc.gnu.org/)
 - [rust](https://www.rust-lang.org/)
 - [dotnet](https://dotnet.microsoft.com/en-us/)
+- [factor](https://factorcode.org/)
 
 ### Likely dependencies for future days
 
@@ -18,7 +19,6 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [BQN](https://mlochbaum.github.io/BQN/)
 - [python](https://www.python.org/)
 - [clang](https://clang.llvm.org/)
-- [factor](https://factorcode.org/)
 
 ## Usage
 
