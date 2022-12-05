@@ -5,7 +5,7 @@ USING:
   kernel
   math math.parser
   prettyprint
-  sequences
+  sequences sequences.deep
   splitting
   vectors
  ;
@@ -18,7 +18,11 @@ TUPLE: instruction
 
 C: <instruction> instruction
 
-: array3 ( arr -- x y z ) [ 0 swap nth ] [ 1 swap nth ] [ 2 swap nth ] tri ;
+: array3 ( arr -- x y z )
+  [ 0 swap nth ] [ 1 swap nth ] [ 2 swap nth ]
+  ! tri is a "cleave combinator", which applies multiple quotations to one value
+  tri
+  ;
 
 : parse-state ( strs -- state )
   ! Transpose the strings
@@ -72,17 +76,35 @@ C: <instruction> instruction
   state
   ;
 
-: part1 ( state instructions -- message )
-  ! Put the state on top
-  swap
-  ! Reduce with part1step
-  [ part1step ] reduce
+:: part2step ( state instruction -- state )
+  instruction source>> 1 - state nth :> source
+  instruction dest>> 1 - state nth :> dest
+  instruction count>> :> count
+  count <vector> :> temp
+  ! Get the top count items from source
+  count [1..b] dup
+  [ source pop temp push drop ] each
+  ! and push onto destination
+  [ temp pop dest push drop ] each
+  ! Return state
+  state
+  ;
+
+: part ( state instructions op -- message )
+  reduce
   ! Get the top element of each stack
   [ pop ] map
   ! Turn it into a string
   >string
-  ;
+  ; inline
 
-: main ( -- ) get-input part1 print ;
+: main ( -- )
+  ! Parse input
+  get-input swap
+  ! Duplicate for both parts
+  2dup [ [ clone ] deep-map ] bi@
+  ! Run parts
+  [ part1step ] [ part2step ] [ part print ] bi@
+  ;
 
 MAIN: main
