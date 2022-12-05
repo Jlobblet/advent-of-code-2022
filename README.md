@@ -11,10 +11,41 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [rust](https://www.rust-lang.org/)
 - [dotnet](https://dotnet.microsoft.com/en-us/)
 - [factor](https://factorcode.org/)
+- [ghc](https://www.haskell.org/ghcup/)
+
+## Table of Solution Languages
+
+| Day | Languages     |
+| --- | ------------- |
+|   1 | J, C, Rust    |
+|   2 | J             |
+|   3 | J, F#, C Bash |
+|   4 | Haskell       |
+|   5 | Factor        |
+|   6 |               |
+|   7 |               |
+|   8 |               |
+|   9 |               |
+|  10 |               |
+|  11 |               |
+|  12 |               |
+|  13 |               |
+|  14 |               |
+|  15 |               |
+|  16 |               |
+|  17 |               |
+|  18 |               |
+|  19 |               |
+|  20 |               |
+|  21 |               |
+|  22 |               |
+|  23 |               |
+|  24 |               |
+|  25 |               |
+
 
 ### Likely dependencies for future days
 
-- [ghc](https://www.haskell.org/ghcup/)
 - [kotlin](https://kotlinlang.org/)
 - [BQN](https://mlochbaum.github.io/BQN/)
 - [python](https://www.python.org/)
