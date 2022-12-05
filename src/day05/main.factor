@@ -89,7 +89,6 @@ C: <instruction> instruction
   ; inline
 
 : main ( -- )
-  
   get-input swap                                 ! Parse input
   2dup [ [ clone ] deep-map ] bi@                ! Duplicate for both parts
   [ part1step ] [ part2step ] [ part print ] bi@ ! Run parts
