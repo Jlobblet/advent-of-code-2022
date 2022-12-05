@@ -64,16 +64,11 @@ C: <instruction> instruction
   ;
 
 :: part1step ( state instruction -- state )
-  ! Get the source
-  instruction source>> 1 - state nth :> source
-  ! and destination
-  instruction dest>> 1 - state nth :> dest
-  ! Repeat count times
-  instruction count>> [1..b]
-  ! Pop from source then push to destination
-  [ source pop dest push drop ] each
-  ! Return state
-  state
+  instruction source>> 1 - state nth :> source ! Get the source
+  instruction dest>> 1 - state nth :> dest     ! and destination
+  instruction count>> [1..b]                   ! Repeat count times
+  [ source pop dest push drop ] each           ! Pop source then push to dest
+  state                                        ! Return state
   ;
 
 :: part2step ( state instruction -- state )
@@ -81,30 +76,23 @@ C: <instruction> instruction
   instruction dest>> 1 - state nth :> dest
   instruction count>> :> count
   count <vector> :> temp
-  ! Get the top count items from source
   count [1..b] dup
-  [ source pop temp push drop ] each
-  ! and push onto destination
-  [ temp pop dest push drop ] each
-  ! Return state
+  [ source pop temp push drop ] each ! Get the top count items from source
+  [ temp pop dest push drop ] each   ! and push onto destination
   state
   ;
 
 : part ( state instructions op -- message )
   reduce
-  ! Get the top element of each stack
-  [ pop ] map
-  ! Turn it into a string
-  >string
+  [ pop ] map ! Get the top element of each stack
+  >string     ! Turn it into a string
   ; inline
 
 : main ( -- )
-  ! Parse input
-  get-input swap
-  ! Duplicate for both parts
-  2dup [ [ clone ] deep-map ] bi@
-  ! Run parts
-  [ part1step ] [ part2step ] [ part print ] bi@
+  
+  get-input swap                                 ! Parse input
+  2dup [ [ clone ] deep-map ] bi@                ! Duplicate for both parts
+  [ part1step ] [ part2step ] [ part print ] bi@ ! Run parts
   ;
 
 MAIN: main
