@@ -26,3 +26,6 @@ day03sh:
 
 day04:
 	$(MAKE) -C src/day04 run
+
+day05:
+	$(MAKE) -C src/day05 run
