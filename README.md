@@ -23,7 +23,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |   3 | J, F#, C Bash |
 |   4 | Haskell, Agda |
 |   5 | Factor        |
-|   6 |               |
+|   6 | J             |
 |   7 |               |
 |   8 |               |
 |   9 |               |

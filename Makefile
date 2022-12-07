@@ -32,3 +32,6 @@ day04agda:
 
 day05:
 	$(MAKE) -C src/day05 run
+
+day06:
+	$(MAKE) -C src/day06 run
