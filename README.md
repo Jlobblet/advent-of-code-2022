@@ -12,6 +12,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [dotnet](https://dotnet.microsoft.com/en-us/)
 - [factor](https://factorcode.org/)
 - [ghc](https://www.haskell.org/ghcup/)
+- [agda](https://wiki.portal.chalmers.se/agda/pmwiki.php)
 
 ## Table of Solution Languages
 
@@ -20,7 +21,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |   1 | J, C, Rust    |
 |   2 | J             |
 |   3 | J, F#, C Bash |
-|   4 | Haskell       |
+|   4 | Haskell, Agda |
 |   5 | Factor        |
 |   6 |               |
 |   7 |               |

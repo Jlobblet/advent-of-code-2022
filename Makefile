@@ -27,5 +27,8 @@ day03sh:
 day04:
 	$(MAKE) -C src/day04 run
 
+day04agda:
+	$(MAKE) -C src/day04agda clean run
+
 day05:
 	$(MAKE) -C src/day05 run
