@@ -13,6 +13,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [factor](https://factorcode.org/)
 - [ghc](https://www.haskell.org/ghcup/)
 - [agda](https://wiki.portal.chalmers.se/agda/pmwiki.php)
+- [python](https://www.python.org/)
 
 ## Table of Solution Languages
 
@@ -24,7 +25,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |   4 | Haskell, Agda |
 |   5 | Factor        |
 |   6 | J             |
-|   7 |               |
+|   7 | Python        |
 |   8 |               |
 |   9 |               |
 |  10 |               |
@@ -49,7 +50,6 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 
 - [kotlin](https://kotlinlang.org/)
 - [BQN](https://mlochbaum.github.io/BQN/)
-- [python](https://www.python.org/)
 - [clang](https://clang.llvm.org/)
 
 ## Usage

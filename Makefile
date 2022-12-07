@@ -35,3 +35,6 @@ day05:
 
 day06:
 	$(MAKE) -C src/day06 run
+
+day07py:
+	$(MAKE) -C src/day07py run
