@@ -14,36 +14,37 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [ghc](https://www.haskell.org/ghcup/)
 - [agda](https://wiki.portal.chalmers.se/agda/pmwiki.php)
 - [python](https://www.python.org/)
+    - [numpy](https://numpy.org/)
 
 ## Table of Solution Languages
 
-| Day | Languages     |
-| --- | ------------- |
-|   1 | J, C, Rust    |
-|   2 | J             |
-|   3 | J, F#, C Bash |
-|   4 | Haskell, Agda |
-|   5 | Factor        |
-|   6 | J             |
-|   7 | Python        |
-|   8 |               |
-|   9 |               |
-|  10 |               |
-|  11 |               |
-|  12 |               |
-|  13 |               |
-|  14 |               |
-|  15 |               |
-|  16 |               |
-|  17 |               |
-|  18 |               |
-|  19 |               |
-|  20 |               |
-|  21 |               |
-|  22 |               |
-|  23 |               |
-|  24 |               |
-|  25 |               |
+| Day | Languages      |
+| --- | -------------- |
+|   1 | J, C, Rust     |
+|   2 | J              |
+|   3 | J, F#, C Bash  |
+|   4 | Haskell, Agda  |
+|   5 | Factor         |
+|   6 | J              |
+|   7 | Python         |
+|   8 | Python (NumPy) |
+|   9 |                |
+|  10 |                |
+|  11 |                |
+|  12 |                |
+|  13 |                |
+|  14 |                |
+|  15 |                |
+|  16 |                |
+|  17 |                |
+|  18 |                |
+|  19 |                |
+|  20 |                |
+|  21 |                |
+|  22 |                |
+|  23 |                |
+|  24 |                |
+|  25 |                |
 
 
 ### Likely dependencies for future days
