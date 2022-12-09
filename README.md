@@ -28,7 +28,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |   6 | J              |
 |   7 | Python         |
 |   8 | Python (NumPy) |
-|   9 |                |
+|   9 | Agda           |
 |  10 |                |
 |  11 |                |
 |  12 |                |
