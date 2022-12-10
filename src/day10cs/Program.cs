@@ -4,20 +4,32 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        IServiceCollection serviceCollection = 
+        IServiceCollection serviceCollection =
             new ServiceCollection()
-            .AddSingleton<IInstructionParser>(new InstructionParser())
-            .AddSingleton<IRegisterAccumulator>(_ => new RegisterAccumulatorCollection(new SignalStrengthAccumulator(), new CrtDisplayAccumulator()))
-            .AddSingleton<IInstructionHandler>(provider => new CrtVideoSystemInstructionHandler(provider.GetRequiredService<IRegisterAccumulator>()))
-            .AddTransient<IFileProcessor>(provider => new CrtVideoSystemFileProcessor(provider.GetRequiredService<IInstructionParser>(), provider.GetRequiredService<IInstructionHandler>()));
+                .AddTransient<IInstructionParser>(_ => new InstructionParser())
+                .AddTransient<SignalStrengthAccumulator>(_ => new SignalStrengthAccumulator())
+                .AddTransient<CrtDisplayAccumulator>(_ => new CrtDisplayAccumulator())
+                .AddTransient<IRegisterAccumulator>(provider =>
+                                                        new
+                                                            RegisterAccumulatorCollection(provider.GetRequiredService<SignalStrengthAccumulator>(),
+                                                                provider
+                                                                    .GetRequiredService<CrtDisplayAccumulator>()))
+                .AddTransient<IInstructionHandler>(provider =>
+                                                       new CrtVideoSystemInstructionHandler(provider
+                                                           .GetRequiredService<IRegisterAccumulator>()))
+                .AddTransient<IFileProcessor>(provider =>
+                                                  new
+                                                      CrtVideoSystemFileProcessor(provider.GetRequiredService<IInstructionParser>(),
+                                                          provider.GetRequiredService<IInstructionHandler>()));
+
         var serviceProviderOptions = new ServiceProviderOptions
         {
             ValidateScopes = true,
         };
         IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider(serviceProviderOptions);
 
-        IEnumerable<string> lines = File.ReadLines(args[0]);
-        var fileProcessor = serviceProvider.GetRequiredService<IFileProcessor>();
+        IEnumerable<string> lines         = File.ReadLines(args[0]);
+        var                 fileProcessor = serviceProvider.GetRequiredService<IFileProcessor>();
         fileProcessor.ProcessFile(lines);
     }
 }
