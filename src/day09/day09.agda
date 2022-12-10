@@ -3,17 +3,16 @@
 module day09 where
 
 open import Data.Bool using (Bool; true; false; _∧_)
-open import Data.Integer as I using (ℤ; SignAbs; _◂_; signAbs; _+_; _-_; _*_; ∣_∣; 0ℤ; 1ℤ; -1ℤ)
+open import Data.Integer as I using (ℤ; _+_; _-_; _*_; ∣_∣; 0ℤ; 1ℤ; -1ℤ)
 open import Data.Integer.Show as IS using ()
 open import Data.List as L using (List; _∷_; []; [_]; concat; deduplicateᵇ; foldl; length; mapMaybe)
 open import Data.Maybe using (Maybe; just; nothing; map)
 open import Data.Nat using (ℕ; suc; zero; _≤ᵇ_; _⊔′_)
 open import Data.Nat.Show using (readMaybe; show)
 open import Data.Product using (_×_; _,_; proj₁; uncurry)
-open import Data.Sign as S using (Sign)
-open import Data.String using (String; unlines; words; lines; _++_)
+open import Data.String using (String; words; lines)
 open import Data.Vec as V using (Vec; last; replicate; toList)
-open import Function using (id; _$_; _∘_)
+open import Function using (_$_; _∘_)
 open import Relation.Binary.PropositionalEquality using (_≡_; refl)
 open import Relation.Nullary.Decidable using (⌊_⌋)
 
@@ -35,9 +34,6 @@ data Point : Set where
 _=ᵇ_ : Point → Point → Bool
 point x₁ y₁ =ᵇ point x₂ y₂ = ⌊ x₁ I.≟ x₂ ⌋ ∧ ⌊ y₁ I.≟ y₂ ⌋
 
-show-Point : Point → String
-show-Point (point x y) = (IS.show x) ++ ", " ++ (IS.show y)
-
 data History : Set where
   history : List Point → History
 
@@ -52,19 +48,6 @@ module Vectors where
 
   move-head : ∀ {n} → Direction → Vec Point (suc n) → Vec Point (suc n)
   move-head d (x ∷ v) = move-point d x ∷ v
-
-  -- aka tail
-  behead : ∀ {n a} {A : Set a} → Vec A (suc n) → Vec A n
-  behead (x ∷ v) = v
-
-  -- aka init
-  curtail : ∀ {n a} {A : Set a} → Vec A (suc n) → Vec A n
-  curtail (x ∷ []) = []
-  curtail (x ∷ v) = curtail′ x v
-    where
-      curtail′ : ∀ {n a} {A : Set a} → A → Vec A n → Vec A n
-      curtail′ _ [] = []
-      curtail′ y (z ∷ zs) = y ∷ curtail′ z zs 
 
   scanl : ∀ {n a b} {A : Set a} {B : Set b} → (A → B → A) → A → Vec B n → Vec A (suc n)
   scanl f e []       = e ∷ []
