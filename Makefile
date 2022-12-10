@@ -44,3 +44,6 @@ day08:
 
 day09:
 	$(MAKE) -C src/day09 run
+
+day10:
+	$(MAKE) -C src/day10 run
