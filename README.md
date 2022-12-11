@@ -15,6 +15,10 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [agda](https://wiki.portal.chalmers.se/agda/pmwiki.php)
 - [python](https://www.python.org/)
     - [numpy](https://numpy.org/)
+- JVM stuff, recommended via [SDKMAN!](https://sdkman.io/)
+    - java
+    - gradle
+    - kotlin
 
 ## Table of Solution Languages
 
@@ -30,7 +34,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |   8 | Python (NumPy) |
 |   9 | Agda           |
 |  10 | J, C#          |
-|  11 |                |
+|  11 | Kotlin         |
 |  12 |                |
 |  13 |                |
 |  14 |                |
@@ -49,7 +53,6 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 
 ### Likely dependencies for future days
 
-- [kotlin](https://kotlinlang.org/)
 - [BQN](https://mlochbaum.github.io/BQN/)
 - [clang](https://clang.llvm.org/)
 

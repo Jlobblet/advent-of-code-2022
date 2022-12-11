@@ -1,4 +1,4 @@
-.PHONY: day01
+.PHONY: day01 day01c day01rs day02 day03 day03fs day03c day03sh day04 day04agda day05 day06 day07py day08 day09 day10 day10cs day11
 
 day01:
 	$(MAKE) -C src/day01 run
@@ -47,3 +47,9 @@ day09:
 
 day10:
 	$(MAKE) -C src/day10 run
+
+day10cs:
+	$(MAKE) -C src/day10cs run-fancy
+
+day11:
+	$(MAKE) -C src/day11 run
