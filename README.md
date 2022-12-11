@@ -19,6 +19,8 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
     - java
     - gradle
     - kotlin
+- [elixir](https://elixir-lang.org/)
+    - requires [erlang](https://www.erlang.org/)
 
 ## Table of Solution Languages
 
@@ -33,7 +35,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |   7 | Python         |
 |   8 | Python (NumPy) |
 |   9 | Agda           |
-|  10 | J, C#          |
+|  10 | J, C#, Elixir  |
 |  11 | Kotlin         |
 |  12 |                |
 |  13 |                |
