@@ -23,9 +23,17 @@ xValues =
   |> then(fn el -> {el, {1, 1}} end)
   |> Stream.unfold(&Solution.step/1)
   |> Enum.concat
+  |> then(fn v -> Enum.concat([{1, 1}], v) end)
 
 xValues
 |> Enum.filter(fn {c, _} -> MapSet.member?(interestingCycles, c) end)
 |> Enum.map(fn {c, x} -> (c + 1) * x end)
 |> Enum.sum
+|> IO.puts
+
+xValues
+|> Enum.map(fn {c, x} -> if abs(rem(c, 40) - x) <= 1 do "█" else " " end end)
+|> Enum.chunk_every(40)
+|> Enum.map(&Enum.join(&1, ""))
+|> Enum.join("\n")
 |> IO.puts
