@@ -3,3 +3,6 @@ data/
 
 # JetBrains stuff
 .idea/
+
+# Some file that is getting created by something
+.Random.seed

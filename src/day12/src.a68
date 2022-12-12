@@ -1,0 +1,102 @@
+MODE LINES = FLEX[1:0] STRING;
+
+OP +:= = (REF LINES u, STRING v) REF LINES: (
+    sweep heap;
+    [UPB u + 1] STRING w;
+    w[: UPB u] := u;
+    w[UPB w] := v;
+    u := w
+);
+
+BOOL finished reading := FALSE;
+on logical file end (stand in, (REF FILE f) BOOL: finished reading := TRUE);
+
+LINES lines;
+WHILE 
+    STRING line;
+    get(stand in, (line, new line));
+    NOT finished reading
+DO
+    lines := lines +:= line
+OD;
+
+INT number of rows := UPB lines, number of columns := UPB lines[1];
+
+[number of rows, number of columns]INT heights;
+[number of rows, number of columns]INT steps;
+[number of rows, number of columns]BOOL changed;
+[2]INT start point;
+[2]INT end   point;
+
+FOR i TO number of rows
+DO
+    FOR j TO number of columns
+    DO
+        CHAR c := lines[i][j];
+        INT h :=
+            IF c = "S"
+            THEN
+                start point := (i, j);
+                0
+            ELIF c = "E"
+            THEN
+                end point := (i, j);
+                25
+            ELSE
+                (ABS c) - 97
+            FI;
+        heights[i, j] := h;
+
+        IF c = "S"
+        THEN
+            steps[i, j] := 0;
+            changed[i, j] := TRUE
+        ELSE
+            steps[i, j] := -1;
+            changed[i, j] := FALSE
+        FI
+    OD
+OD;
+
+WHILE steps[end point[1], end point[2]] = -1
+DO
+    FOR i TO number of rows
+    DO
+        FOR j TO number of columns
+        DO
+            IF changed[i, j]
+            THEN
+                changed[i, j] := FALSE;
+                FOR i offset FROM -1 BY 2 TO 1
+                DO
+                    INT i prime := i + i offset;
+                    IF i prime >= 1 AND i prime <= number of rows
+                    THEN
+                        INT height difference := heights[i prime, j] - heights[i, j];
+                        IF height difference <= 1 AND (steps[i prime, j] > steps[i, j] + 1 OR steps[i prime, j] = -1)
+                        THEN
+                            steps[i prime, j] := steps[i, j] + 1;
+                            changed[i prime, j] := TRUE
+                        FI
+                    FI
+                OD;
+
+                FOR j offset FROM -1 BY 2 TO 1
+                DO
+                    INT j prime := j + j offset;
+                    IF j prime >= 1 AND j prime <= number of columns
+                    THEN
+                        INT height difference := heights[i, j prime] - heights[i, j];
+                        IF height difference <= 1 AND (steps[i, j prime] > steps[i, j] + 1 OR steps[i, j prime] = -1)
+                        THEN
+                            steps[i, j prime] := steps[i, j] + 1;
+                            changed[i, j prime] := TRUE
+                        FI
+                    FI
+                OD
+            FI
+        OD
+    OD
+OD;
+
+print((steps[end point[1], end point[2]], new line))

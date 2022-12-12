@@ -21,6 +21,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
     - kotlin
 - [elixir](https://elixir-lang.org/)
     - requires [erlang](https://www.erlang.org/)
+- [ALGOL 68 Genie](https://jmvdveer.home.xs4all.nl/en.algol-68-genie.html)
 
 ## Table of Solution Languages
 
@@ -37,7 +38,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |   9 | Agda           |
 |  10 | J, C#, Elixir  |
 |  11 | Kotlin         |
-|  12 |                |
+|  12 | ALGOL 68       |
 |  13 |                |
 |  14 |                |
 |  15 |                |
