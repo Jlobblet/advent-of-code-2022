@@ -107,7 +107,7 @@ print((steps[start point[1], start point[2]], new line));
 INT shortest := steps[start point[1], start point[2]];
  
 PRIO MIN = 9;
-OP MIN = (INT a,b) INT: ( a<b | a | b );
+OP MIN = (INT a, b) INT: ( a < b | a | b );
 
 FOR i TO number of rows
 DO
