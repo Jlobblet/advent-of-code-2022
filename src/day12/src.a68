@@ -47,7 +47,7 @@ DO
             FI;
         heights[i, j] := h;
 
-        IF c = "S"
+        IF c = "E"
         THEN
             steps[i, j] := 0;
             changed[i, j] := TRUE
@@ -58,8 +58,11 @@ DO
     OD
 OD;
 
-WHILE steps[end point[1], end point[2]] = -1
+BOOL continue := TRUE;
+
+WHILE continue
 DO
+    continue := FALSE;
     FOR i TO number of rows
     DO
         FOR j TO number of columns
@@ -69,28 +72,28 @@ DO
                 changed[i, j] := FALSE;
                 FOR i offset FROM -1 BY 2 TO 1
                 DO
-                    INT i prime := i + i offset;
-                    IF i prime >= 1 AND i prime <= number of rows
+                    IF INT i prime := i + i offset;
+                        i prime >= 1 AND i prime <= number of rows
                     THEN
-                        INT height difference := heights[i prime, j] - heights[i, j];
-                        IF height difference <= 1 AND (steps[i prime, j] > steps[i, j] + 1 OR steps[i prime, j] = -1)
+                        IF INT height difference := heights[i, j] - heights[i prime, j];
+                            height difference <= 1 AND (steps[i prime, j] > steps[i, j] + 1 OR steps[i prime, j] = -1)
                         THEN
                             steps[i prime, j] := steps[i, j] + 1;
-                            changed[i prime, j] := TRUE
+                            continue := changed[i prime, j] := TRUE
                         FI
                     FI
                 OD;
 
                 FOR j offset FROM -1 BY 2 TO 1
                 DO
-                    INT j prime := j + j offset;
-                    IF j prime >= 1 AND j prime <= number of columns
+                    IF INT j prime := j + j offset;
+                        j prime >= 1 AND j prime <= number of columns
                     THEN
-                        INT height difference := heights[i, j prime] - heights[i, j];
-                        IF height difference <= 1 AND (steps[i, j prime] > steps[i, j] + 1 OR steps[i, j prime] = -1)
+                        IF INT height difference := heights[i, j] - heights[i, j prime];
+                            height difference <= 1 AND (steps[i, j prime] > steps[i, j] + 1 OR steps[i, j prime] = -1)
                         THEN
                             steps[i, j prime] := steps[i, j] + 1;
-                            changed[i, j prime] := TRUE
+                            continue := changed[i, j prime] := TRUE
                         FI
                     FI
                 OD
@@ -99,4 +102,22 @@ DO
     OD
 OD;
 
-print((steps[end point[1], end point[2]], new line))
+print((steps[start point[1], start point[2]], new line));
+
+INT shortest := steps[start point[1], start point[2]];
+ 
+PRIO MIN = 9;
+OP MIN = (INT a,b) INT: ( a<b | a | b );
+
+FOR i TO number of rows
+DO
+    FOR j TO number of columns
+    DO
+        IF heights[i, j] = 0 AND steps[i, j] /= -1
+        THEN
+            shortest := shortest MIN steps[i, j]
+        FI
+    OD
+OD;
+
+print(shortest)
