@@ -4,5 +4,5 @@ data/
 # JetBrains stuff
 .idea/
 
-# Some file that is getting created by something
+# Some file that is getting created by ALGOL 68 Genie
 .Random.seed
