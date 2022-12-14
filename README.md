@@ -40,7 +40,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |  11 | Kotlin         |
 |  12 | ALGOL 68       |
 |  13 | ALGOL 68       |
-|  14 |                |
+|  14 | Rust           |
 |  15 |                |
 |  16 |                |
 |  17 |                |
