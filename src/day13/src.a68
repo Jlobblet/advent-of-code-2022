@@ -3,15 +3,16 @@ MODE VALUES = REF FLEX[] VALUE;
 
 PROC print value = (REF VALUE v) VOID: (
     CASE v IN
-        (INT i): print((i, ", ")),
+        (INT i): print(i),
         (NESTED n): (
             print("[");
             REF []VALUE v := nested OF n;
             FOR i FROM LWB v TO UPB v
             DO
-                print value (v[i])
+                print value (v[i]);
+                ( i < UPB v | print(", "))
             OD;
-            print("], ")
+            print("]")
         )
     ESAC
 );
