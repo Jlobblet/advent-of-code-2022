@@ -39,7 +39,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |  10 | J, C#, Elixir  |
 |  11 | Kotlin         |
 |  12 | ALGOL 68       |
-|  13 |                |
+|  13 | ALGOL 68       |
 |  14 |                |
 |  15 |                |
 |  16 |                |

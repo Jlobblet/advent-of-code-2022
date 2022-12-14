@@ -1,0 +1,170 @@
+MODE VALUE = UNION (NESTED, INT), NESTED = STRUCT (REF FLEX []VALUE nested);
+MODE VALUES = REF FLEX[] VALUE;
+
+PROC print value = (REF VALUE v) VOID: (
+    CASE v IN
+        (INT i): print((i, ", ")),
+        (NESTED n): (
+            print("[");
+            REF []VALUE v := nested OF n;
+            FOR i FROM LWB v TO UPB v
+            DO
+                print value (v[i])
+            OD;
+            print("], ")
+        )
+    ESAC
+);
+
+PROC empty values = VALUES: (
+    REF []VALUE return = HEAP [0]VALUE; return
+);
+
+PROC singleton = (INT i) REF []VALUE: (
+    REF []VALUE v = HEAP [1]VALUE := (i);
+    v
+);
+
+PROC nest = (REF []VALUE v) VALUE: (
+    NESTED n;
+    nested OF n := v;
+    n
+);
+
+OP +:= = (VALUES values, VALUE v) VALUES: (
+    [UPB values + 1] VALUE new;
+    new[: UPB values] := values;
+    new[UPB new] := v;
+    values := new;
+    values
+);
+
+PRIO MIN = 9;
+OP MIN = (INT a, b) INT: ( a < b | a | b );
+
+# Priority of other comparison operators #
+PRIO CMP = 5;
+OP CMP = (INT a, b) INT: ( a > b | -1 |: a < b | 1 | 0 );
+OP CMP = (REF []VALUE a, b) INT: (
+    INT length of a = UPB a - LWB a + 1,
+        length of b = UPB b - LWB b + 1;
+    INT ret := 0;
+    FOR i TO length of a MIN length of b
+    WHILE ret = 0
+    DO
+        ret := a[i] CMP b[i]
+    OD;
+    ( ret /= 0 | ret | length of a CMP length of b )
+);
+
+OP CMP = (REF VALUE a, b) INT: (
+    CASE a IN
+        (INT i): CASE b IN
+            (INT j): i CMP j,
+            (NESTED v): singleton(i) CMP nested OF v
+        ESAC,
+        (NESTED u): CASE b IN
+            (INT j): nested OF u CMP singleton(j),
+            (NESTED v): nested OF u CMP nested OF v
+        ESAC
+    ESAC
+);
+
+MODE STACKNEXT = STRUCT (VALUES values, REF STACKNEXT next);
+
+PROC new stacknext = REF STACKNEXT: HEAP STACKNEXT;
+
+PROC free stacknext = (REF STACKNEXT s) VOID: next OF s := NIL;
+
+MODE STACK = REF STACKNEXT;
+
+PROC stack init = (REF STACK self) REF STACK: self := NIL;
+
+PROC push = (REF STACK self, VALUES value) REF STACK: self := new stacknext := (value, self);
+
+OP +:= = (REF STACK self, VALUES value) REF STACK: push(self, value);
+
+PROC pop = (REF STACK self) VALUES: (
+    STACKNEXT old head := self;
+    STACK new head := next OF self;
+    VALUES return := values OF self;
+    free stacknext (old head);
+    self := new head;
+    return
+);
+
+PROC parse line = (STRING line) VALUE: (
+    STACK stack;
+    VOID(stack init(stack));
+    stack +:= empty values;
+    BOOL start new := FALSE;
+    FOR i TO UPB line
+    DO
+        CHAR c = line[i];
+        IF c = "[" THEN
+            stack +:= empty values;
+            start new := TRUE
+        ELIF c = "]" THEN
+            REF []VALUE vs := pop(stack);
+            VALUE v := nest(vs);
+            (values OF stack) +:= v;
+            start new := TRUE
+        ELIF c = "," THEN
+            start new := TRUE
+        ELIF is digit (c) THEN
+            REF []VALUE vs := values OF stack;
+            IF start new THEN values OF stack +:= 0 FI;
+            CASE vs[UPB vs]
+            IN
+                (INT i): vs[UPB vs] := 10 * i + (ABS c - ABS "0")
+            OUT
+                EMPTY
+            ESAC;
+            start new := FALSE
+        ELSE
+            SKIP
+        FI
+    OD;
+
+    nest(values OF stack)
+);
+
+#
+PROC test pair of lines = (STRING line1, line2, BOOL expected) BOOL: (
+    VALUE v1 := parse line (line1), v2 := parse line(line2);
+    INT result := v1 CMP v2;
+    BOOL actual := result >= 0;
+    print(("Expected: ", expected, new line, "Actual:   ", actual, new line, new line));
+    expected = actual
+);
+
+VOID(test pair of lines ("[1,1,3,1,1]", "[1,1,5,1,1]", TRUE));
+VOID(test pair of lines ("[[1],[2,3,4]]", "[[1],4]", TRUE));
+VOID(test pair of lines ("[9]", "[[8,7,6]]", FALSE));
+VOID(test pair of lines ("[[4,4],4,4]", "[[4,4],4,4,4]", TRUE));
+VOID(test pair of lines ("[7,7,7,7]", "[7,7,7]", FALSE));
+VOID(test pair of lines ("[]", "[3]", TRUE));
+VOID(test pair of lines ("[[[]]]", "[[]]", FALSE));
+VOID(test pair of lines ("[1,[2,[3,[4,[5,6,7]]]],8,9]", "[1,[2,[3,[4,[5,6,0]]]],8,9]", FALSE));
+#
+
+INT sum := 0;
+INT current := 0;
+
+WHILE 
+    STRING line;
+    BOOL finished reading := FALSE;
+    on logical file end (stand in, (REF FILE f) BOOL: finished reading := TRUE);
+
+    current +:= 1;
+    get(stand in, (line, new line));
+    VALUE left := parse line (line);
+    get(stand in, (line, new line));
+    VALUE right := parse line (line);
+    get(stand in, new line);
+    NOT finished reading
+DO
+    sum +:= (left CMP right >= 0 | current | 0)
+OD;
+
+print((sum, new line))
