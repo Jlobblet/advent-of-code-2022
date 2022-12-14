@@ -70,6 +70,10 @@ OP CMP = (REF VALUE a, b) INT: (
     ESAC
 );
 
+OP <= = (REF VALUE a, b) BOOL: a CMP b >= 0;
+OP < = (REF VALUE a, b) BOOL: a CMP b = 1;
+OP > = (REF VALUE a, b) BOOL: a CMP b = -1;
+
 MODE STACKNEXT = STRUCT (VALUES values, REF STACKNEXT next);
 
 PROC new stacknext = REF STACKNEXT: HEAP STACKNEXT;
@@ -129,27 +133,10 @@ PROC parse line = (STRING line) VALUE: (
     nest(values OF stack)
 );
 
-#
-PROC test pair of lines = (STRING line1, line2, BOOL expected) BOOL: (
-    VALUE v1 := parse line (line1), v2 := parse line(line2);
-    INT result := v1 CMP v2;
-    BOOL actual := result >= 0;
-    print(("Expected: ", expected, new line, "Actual:   ", actual, new line, new line));
-    expected = actual
-);
-
-VOID(test pair of lines ("[1,1,3,1,1]", "[1,1,5,1,1]", TRUE));
-VOID(test pair of lines ("[[1],[2,3,4]]", "[[1],4]", TRUE));
-VOID(test pair of lines ("[9]", "[[8,7,6]]", FALSE));
-VOID(test pair of lines ("[[4,4],4,4]", "[[4,4],4,4,4]", TRUE));
-VOID(test pair of lines ("[7,7,7,7]", "[7,7,7]", FALSE));
-VOID(test pair of lines ("[]", "[3]", TRUE));
-VOID(test pair of lines ("[[[]]]", "[[]]", FALSE));
-VOID(test pair of lines ("[1,[2,[3,[4,[5,6,7]]]],8,9]", "[1,[2,[3,[4,[5,6,0]]]],8,9]", FALSE));
-#
 
 INT sum := 0;
 INT current := 0;
+VALUES all values := empty values;
 
 WHILE 
     STRING line;
@@ -159,12 +146,108 @@ WHILE
     current +:= 1;
     get(stand in, (line, new line));
     VALUE left := parse line (line);
+    all values +:= left;
     get(stand in, (line, new line));
     VALUE right := parse line (line);
+    all values +:= right;
     get(stand in, new line);
+
     NOT finished reading
 DO
-    sum +:= (left CMP right >= 0 | current | 0)
+    sum +:= (left <= right | current | 0)
 OD;
 
-print((sum, new line))
+print((sum, new line));
+
+# Part 2 #
+PROC swap = (VALUES vs, INT a, b) VOID: (
+    VALUE tmp = vs[a];
+    vs[a] := vs[b];
+    vs[b] := tmp
+);
+
+PROC quicksort step = (VALUES vs, INT lower, upper) VOID: (
+    INT smaller := lower + 1,
+        larger  := upper;
+
+    VALUE pivot := vs[lower];
+
+    WHILE smaller <= larger
+    DO
+        WHILE
+            VALUE s := vs[smaller];
+            s < pivot AND smaller < upper
+        DO smaller +:= 1 OD;
+        WHILE
+            VALUE l := vs[larger];
+            l > pivot AND larger > lower
+        DO larger -:= 1 OD;
+        IF smaller < larger THEN
+            swap(vs, smaller, larger);
+            smaller +:= 1;
+            larger  -:= 1
+        ELSE
+            smaller +:= 1
+        FI
+    OD;
+
+    swap(vs, lower, larger);
+
+    IF lower < larger - 1 THEN quicksort step (vs, lower, larger - 1) FI;
+    IF upper > larger + 1 THEN quicksort step (vs, larger + 1, upper) FI
+);
+
+PROC quicksort = (VALUES vs) VOID: (UPB vs > 1 | quicksort step (vs, 1, UPB vs));
+
+# Add dividers #
+STRING divider two string = "[[2]]",
+    divider six string = "[[6]]";
+VALUE divider two := parse line (divider two string),
+    divider six := parse line (divider six string);
+all values +:= divider two;
+all values +:= divider six;
+
+# Sort #
+quicksort(all values);
+
+OP = = (REF []VALUE a, b) BOOL: (
+    INT length of a = UPB a - LWB a + 1,
+        length of b = UPB b - LWB b + 1;
+    IF length of a = length of b THEN
+        BOOL return := TRUE;
+        FOR i TO length of a
+        WHILE return
+        DO
+            return := a[i] = b[i]
+        OD;
+        return
+    ELSE
+        FALSE
+    FI
+);
+
+OP = = (REF VALUE a, b) BOOL: (
+    CASE a IN
+        (INT i): CASE b IN
+            (INT j): i = j,
+            (NESTED v): FALSE
+        ESAC,
+        (NESTED u): CASE b IN
+            (INT j): FALSE,
+            (NESTED v): nested OF u = nested OF v
+        ESAC
+    ESAC
+);
+
+# Find indices #
+INT divider two index := 0, divider six index := 0;
+
+FOR i TO UPB all values
+DO
+    VALUE v := all values [i];
+    (  v = divider two | divider two index := i
+    |: v = divider six | divider six index := i )
+OD;
+
+# Subtract 2 because I'm adding two empty lists at the start somewhere #
+print(((divider two index - 2) * (divider six index - 2), new line))
