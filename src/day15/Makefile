@@ -13,5 +13,5 @@ day15:
 
 build: day15
 
-run: day15
+run: build
 	INPUT=$(INPUT) TARGET_Y=$(TARGET_Y) ./day15
