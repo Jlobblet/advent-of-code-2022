@@ -1,6 +1,6 @@
 .PHONY: day01 day01c day01rs day02 day03 day03fs day03c day03sh day04 day04agda
 .PHONY: day05 day06 day07py day08 day09 day10 day10cs day10ex day11 day12 day13
-.PHONY: day14
+.PHONY: day14 day15
 
 day01:
 	$(MAKE) -C src/day01 run
@@ -67,3 +67,6 @@ day13:
 
 day14:
 	$(MAKE) -C src/day14 run
+
+day15:
+	$(MAKE) -C src/day15 run

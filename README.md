@@ -22,6 +22,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 - [elixir](https://elixir-lang.org/)
     - requires [erlang](https://www.erlang.org/)
 - [ALGOL 68 Genie](https://jmvdveer.home.xs4all.nl/en.algol-68-genie.html)
+- [A D compiler of choice](https://dlang.org/download.html)
 
 ## Table of Solution Languages
 
@@ -41,7 +42,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |  12 | ALGOL 68       |
 |  13 | ALGOL 68       |
 |  14 | Rust           |
-|  15 |                |
+|  15 | D              |
 |  16 |                |
 |  17 |                |
 |  18 |                |
