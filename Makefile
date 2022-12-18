@@ -69,4 +69,4 @@ day14:
 	$(MAKE) -C src/day14 run
 
 day15:
-	$(MAKE) -C src/day15 run
+	$(MAKE) -C src/day15 clean run
