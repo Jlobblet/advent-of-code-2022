@@ -50,12 +50,11 @@ module Vectors where
   move-head d (x ∷ v) = move-point d x ∷ v
 
   scanl : ∀ {n a b} {A : Set a} {B : Set b} → (A → B → A) → A → Vec B n → Vec A (suc n)
-  scanl f e []       = e ∷ []
-  scanl f e (x ∷ xs) = e ∷ scanl f (f e x) xs
+  scanl _⊕_ e []       = e ∷ []
+  scanl _⊕_ e (x ∷ xs) = e ∷ scanl _⊕_ (e ⊕ x) xs
 
-  scanl1 : ∀ {n a} {A : Set a} → (A → A → A) → Vec A n → Vec A n
-  scanl1 f [] = []
-  scanl1 f (x ∷ v) = scanl f x v
+  scanl₁ : ∀ {n a} {A : Set a} → (A → A → A) → Vec A (suc n) → Vec A (suc n)
+  scanl₁ _⊕_ (x ∷ v) = scanl _⊕_ x v
 
 open Vectors
 
@@ -75,8 +74,8 @@ yank-tail h@(point xₕ yₕ) t@(point xₜ yₜ) with h touching? t
       yₜ′ = yₜ + signum (yₕ - yₜ)
   in point xₜ′ yₜ′
 
-yank : ∀ {n} → Vec Point n → Vec Point n
-yank {n} = scanl1 yank-tail
+yank : ∀ {n} → Vec Point (suc n) → Vec Point (suc n)
+yank {n} = scanl₁ yank-tail
 
 execute-instruction : ∀ {n} → History → Vec Point (suc n) → Instruction → History × Vec Point (suc n)
 execute-instruction hist r (instruction _ zero) = hist , r
