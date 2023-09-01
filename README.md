@@ -52,7 +52,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |  22 |                |
 |  23 |                |
 |  24 |                |
-|  25 |                |
+|  25 | Haskell        |
 
 
 ### Likely dependencies for future days
