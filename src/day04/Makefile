@@ -1,6 +1,6 @@
 INPUT=../../data/04.txt
 
-.PHONY: clean build run
+.PHONY: clean build run test
 
 clean:
 	stack clean
