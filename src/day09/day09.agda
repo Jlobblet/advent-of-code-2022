@@ -3,7 +3,7 @@
 module day09 where
 
 open import Data.Bool using (Bool; true; false; _∧_)
-open import Data.Integer as I using (ℤ; _+_; _-_; _*_; ∣_∣; 0ℤ; 1ℤ; -1ℤ)
+open import Data.Integer as I using (ℤ; +_; -[1+_]; _+_; _-_; _*_; ∣_∣; 0ℤ; 1ℤ; -1ℤ)
 open import Data.Integer.Show as IS using ()
 open import Data.List as L using (List; _∷_; []; [_]; concat; deduplicateᵇ; foldl; length; mapMaybe)
 open import Data.Maybe using (Maybe; just; nothing; map)
@@ -13,7 +13,8 @@ open import Data.Product using (_×_; _,_; proj₁; uncurry)
 open import Data.String using (String; words; lines)
 open import Data.Vec as V using (Vec; last; replicate; toList)
 open import Function using (_$_; _∘_)
-open import Relation.Binary.PropositionalEquality using (_≡_; refl)
+import Relation.Binary.PropositionalEquality as Eq
+open Eq using (_≡_; refl)
 open import Relation.Nullary.Decidable using (⌊_⌋)
 
 2ℤ : ℤ
@@ -128,6 +129,8 @@ module _ where
         putStrLn ∘ show ∘ part₂ $ input
 
 module _ where
+  open import Data.Integer.Properties using (*-identityˡ)
+
   example-input-1 : String
   example-input-1 =
     "R 4\n\
@@ -224,3 +227,8 @@ module _ where
 
   signum-thm-3 : ∀ {n} → signum (I.-[1+ n ]) ≡ -1ℤ
   signum-thm-3 = refl
+
+  signum-thm : ∀ {n} → (signum n) * + ∣ n ∣ ≡ n
+  signum-thm {I.+0} = refl
+  signum-thm {n@(I.+[1+ _ ])} rewrite *-identityˡ n = refl
+  signum-thm {n@(I.-[1+ _ ])} rewrite *-identityˡ n = refl
