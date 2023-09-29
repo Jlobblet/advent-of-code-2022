@@ -1,6 +1,6 @@
 .PHONY: day01 day01c day01rs day02 day03 day03fs day03c day03sh day04 day04agda
 .PHONY: day05 day06 day07py day08 day09 day10 day10cs day10ex day11 day12 day13
-.PHONY: day14 day15 day21
+.PHONY: day14 day15 day21 day25
 
 day01:
 	$(MAKE) -C src/day01 run
@@ -74,3 +74,5 @@ day15:
 day21:
 	CFLAGS=-O3 $(MAKE) -C src/day21 clean run
 
+day25:
+	$(MAKE) -C src/day25 run
