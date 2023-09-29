@@ -48,7 +48,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |  18 |                |
 |  19 |                |
 |  20 |                |
-|  21 |                |
+|  21 | C              |
 |  22 |                |
 |  23 |                |
 |  24 |                |
