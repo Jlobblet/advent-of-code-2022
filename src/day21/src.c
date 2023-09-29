@@ -22,7 +22,7 @@ struct Monkey {
 
 // name + colon + space + name + space + op + space + name + lf + nul
 //    4 +     1 +     1 +    4 +     1 +  1 +     1 +    4 +  1 +   1
-static const uint64_t MAX_LINE_LENGTH = 19;
+static const int MAX_LINE_LENGTH = 19;
 static const uint64_t MAX_MONKEYS = 456976;  // ⁿ4 26
 static const uint64_t ROOT = 308639;  // /(+×26) -@a "root"
 static const uint64_t HUMN = 136877;  // /(+×26) -@a "humn"
