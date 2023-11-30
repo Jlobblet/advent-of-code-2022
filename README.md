@@ -19,6 +19,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
     - java
     - gradle
     - kotlin
+    - clojure via leiningen
 - [elixir](https://elixir-lang.org/)
     - requires [erlang](https://www.erlang.org/)
 - [ALGOL 68 Genie](https://jmvdveer.home.xs4all.nl/en.algol-68-genie.html)
@@ -43,7 +44,7 @@ Unlike previous years, I am to write a variety of languages day-to-day based on 
 |  13 | ALGOL 68       |
 |  14 | Rust           |
 |  15 | D              |
-|  16 |                |
+|  16 | Clojure        |
 |  17 |                |
 |  18 |                |
 |  19 |                |
