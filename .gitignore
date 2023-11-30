@@ -7,7 +7,7 @@ data/
 # Some file that is getting created by ALGOL 68 Genie
 .Random.seed
 
-# Things that Calver likes to create
+# Things that Calva likes to create
 .lsp
 .vscode
 .clj-kondo
